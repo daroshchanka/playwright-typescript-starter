@@ -1,0 +1,48 @@
+{
+    "name": "playwright-typescript-starter",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "install": "npm install",
+        "reinstall": "npx playwright install",
+        "install-deps": "npx playwright install-deps",
+        "clean": "rimraf output",
+        "health-check": "npm run clean && npx playwright test ./src/test/health-check.spec.ts --project=chromium --headed",
+
+        "show-report-playwright": "npx playwright show-report ./output/html",
+        "show-report-allure": "allure generate ./output/allure-results -o ./output/allure-report --clean & allure open ./output/allure-report",
+
+        "test-booking": "npm run clean && npx playwright test ./src/test/booking/ --project=chromium --headed",
+        "test-httpbin": "npm run clean && npx playwright test ./src/test/httpbin/ --project=chromium",
+        "test-all": "npm run clean && npx playwright test --project=chromium",
+
+        "vscode-debug": "npx playwright test --config ./playwright.config.ts --workers=1 --project=chromium --headed"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://TODO.git"
+    },
+    "devDependencies": {
+        "@playwright/test": "^1.47.0",
+        "@types/imapflow": "^1.0.19",
+        "@types/mysql": "^2.15.26",
+        "allure-commandline": "^2.30.0",
+        "allure-playwright": "^2.15.1",
+        "cross-env": "^7.0.3",
+        "imapflow": "^1.0.164",
+        "lighthouse": "^10.4.0",
+        "mysql2": "^3.11.2",
+        "npm": "^10.8.3",
+        "playwright": "^1.47.0",
+        "playwright-lighthouse": "4.0.0",
+        "typescript": "^5.6.2",
+        "async-wait-until": "^2.0.12",
+        "tslog": "^4"
+    },
+    "dependencies": {
+        "@faker-js/faker": "^9.0.0",
+        "dotenv": "^16.4.5",
+        "rimraf": "^6.0.1"
+    }
+}
