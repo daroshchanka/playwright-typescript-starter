@@ -17,7 +17,7 @@ Optionally Database and Email utills added as the example how the project can be
 
 Do 4 steps:
 - `npm install` - install dependencies
-- `npm run install-playwright` - install playwright brousers + dependencies
+- `npm run install-playwright` - install playwright browsers + dependencies
 - `npm run health-check` - run `test/health-check.spec.ts` spec
 - `npm run show-report-playwright` or `npm run show-report-allure` - show reports
 
