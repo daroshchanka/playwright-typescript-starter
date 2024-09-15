@@ -13,7 +13,7 @@
         "show-report-allure": "allure generate ./output/allure-results -o ./output/allure-report --clean & allure open ./output/allure-report",
 
         "test-booking": "npm run clean && npx playwright test ./src/test/booking/ --project=chromium",
-        "test-httpbin": "npm run clean && npx playwright test ./src/test/httpbin/",
+        "test-httpbin": "npm run clean && npx playwright test ./src/test/httpbin/ --project=chromium",
         "test-all": "npm run clean && npx playwright test --project=chromium",
 
         "vscode-debug": "npx playwright test --config ./playwright.config.ts --workers=1 --project=chromium --headed"

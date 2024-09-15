@@ -1,7 +1,7 @@
-import { LandingPage } from '../../../project/booking/web/pages/LandingPage';
-import { SearchResultsPage } from '../../../project/booking/web/pages/SearchResultsPage';
+import { LandingPage } from '../../../project/booking/web/pages/landingPage';
+import { SearchResultsPage } from '../../../project/booking/web/pages/searchResultsPage';
 import { test, expect } from '@playwright/test';
-import { TestConfig } from '../TestConfig';
+import { TestConfig } from '../testConfig';
 
 test.use({
     baseURL: TestConfig.instance.getWebBaseUrl(),

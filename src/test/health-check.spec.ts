@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { LoggerProvider } from '../project/LoggerProvider';
+import { LoggerProvider } from '../project/loggerProvider';
 
 const log = LoggerProvider.logger;
 

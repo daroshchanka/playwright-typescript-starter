@@ -1,8 +1,8 @@
-import { AnythingService } from '../../../project/httpbin/api/services/AnythingService';
-import { AnythingDto } from '../../../project/httpbin/utils/data/AnythingDto';
-import { AnythingGeterator } from '../../../project/httpbin/utils/data/generators/AnythingGenerator';
+import { AnythingService } from '../../../project/httpbin/api/services/anythingService';
+import { AnythingDto } from '../../../project/httpbin/utils/data/anythingDto';
+import { AnythingGeterator } from '../../../project/httpbin/utils/data/generators/anythingGenerator';
 import { test, expect } from '@playwright/test'
-import { TestConfig } from '../TestConfig';
+import { TestConfig } from '../testConfig';
 
 
 test.use({
