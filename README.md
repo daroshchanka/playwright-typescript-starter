@@ -8,7 +8,7 @@ Optionally Database and Email utills added as the example how the project can be
 
 ### Project Structure
 
-- `src/core`  - project-agnostic code, would be common for any produc/project to be automated
+- `src/core`  - project-agnostic code, common for any product/project to be automated
 - `src/project`  - project-specific base code, including objects and utils for the particular project (pageobjects for web, services for api, utils, datagenerators, etc.)
 - `src/test` - project test specs, grouped by directories, components, etc. also test config definition is there (base urls, etc.)
 
@@ -39,7 +39,7 @@ So, to switch env just provide `--ENV` in command-line.
 - `npm run test-httpbin --ENV=dev` 
 - `npm run test-httpbin --ENV=stage` 
 
-Unknown or missing env value will eb mapped to `dev`.
+Unknown or missing env value will be mapped to `dev`.
 
 
 #### Generate/Show Reports
