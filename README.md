@@ -15,8 +15,9 @@ Optionally Database and Email utills added as the example how the project can be
 
 ### Quick Start
 
-Do 3 steps:
+Do 4 steps:
 - `npm install` - install dependencies
+- `npm run install-playwright` - install playwright brousers + dependencies
 - `npm run health-check` - run `test/health-check.spec.ts` spec
 - `npm run show-report-playwright` or `npm run show-report-allure` - show reports
 
@@ -35,8 +36,8 @@ static instance: TestConfig = new TestConfig(process.env.npm_config_ENV == undef
 
 So, to switch env just provide `--ENV` in command-line.
 
-- `npm test-httpbin --ENV=dev` 
-- `npm test-httpbin --ENV=stage` 
+- `npm run test-httpbin --ENV=dev` 
+- `npm run test-httpbin --ENV=stage` 
 
 Unknown or missing env value will eb mapped to `dev`.
 
