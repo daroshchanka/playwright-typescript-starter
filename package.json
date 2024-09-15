@@ -1,0 +1,42 @@
+{
+    "name": "playwright-typescript-starter",
+    "version": "1.0.0",
+    "description": "Test automation project boilerplate including packages structure, reporting, logging, multi-env run configuration for WEB and API test automation.",
+    "main": "index.js",
+    "scripts": {
+        "install": "npm install",
+        "install-playwright": "npx playwright install --with-deps",
+        "clean": "rimraf output",
+        "health-check": "npm run clean && npx playwright test ./src/test/health-check.spec.ts --project=chromium",
+        "show-report-playwright": "npx playwright show-report ./output/html",
+        "show-report-allure": "allure generate ./output/allure-results -o ./output/allure-report --clean & allure open ./output/allure-report",
+        "test-booking": "npm run clean && npx playwright test ./src/test/booking/ --project=chromium",
+        "test-httpbin": "npm run clean && npx playwright test ./src/test/httpbin/ --project=chromium",
+        "test-all": "npm run clean && npx playwright test --project=chromium",
+        "vscode-debug": "npx playwright test --config ./playwright.config.ts --workers=1 --project=chromium --headed"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/daroshchanka/playwright-typescript-starter.git"
+    },
+    "devDependencies": {
+        "npm": "^10.8.3",
+        "@types/node": "^22.5.5",
+        "typescript": "^5.6.2",
+        "@playwright/test": "^1.47.1",
+        "allure-commandline": "^2.30.0",
+        "allure-playwright": "^2.15.1",
+        "imapflow": "^1.0.164",
+        "@types/imapflow": "^1.0.19",
+        "mysql2": "^3.11.2",
+        "@types/mysql": "^2.15.26",
+        "lighthouse": "^10.4.0",
+        "playwright-lighthouse": "4.0.0",
+        "async-wait-until": "^2.0.12",
+        "tslog": "^4",
+        "@faker-js/faker": "^9.0.0",
+        "rimraf": "^6.0.1"
+    },
+    "dependencies": {
+    }
+}
