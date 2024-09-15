@@ -50,69 +50,76 @@ export class SearchWidget extends BaseWebPage {
 
     async doSearch(query) {
         this.log.info(`Do search ${JSON.stringify(query)}`);
-
         if (query.where) {
-            await this.destinationContainer.click(this.page);
-            await this.destinationInput.fill(this.page, query.where);
-            await this.pause(500);
-            await this.getDestinationAutocompleteResult(1).click(this.page);
+            await this.fillWhere(query.where);
         }
-
         if (query.when) {
-            if (!await this.datesContainerButton.isVisible(this.page)) {
-                await this.datesContainerButton.click(this.page);
-            }
-            if (query.when.flexibility) {
-                await this.getFlexibleDaysOption(query.when.flexibility).click(this.page);
-            }
-            let fromMonth = query.when.from.month == 'next' ? 2 : 1;
-            await this.getDatepickerDay(query.when.from.day, fromMonth).click(this.page);
-
-            let toMonth = query.when.to.month == 'next' ? 2 : 1;
-            await this.getDatepickerDay(query.when.to.day, toMonth).click(this.page);
-
+            await this.fillWhen(query.when);
         }
-
         if (query.occupancy) {
-            if (!await this.occupancyConfigPopup.isVisible(this.page)) {
-                await this.occupancyConfigButton.click(this.page);
-            }
-            await this.adjustValueForOccupancy(
-                query.occupancy.adults, this.occupancyConfigAdultsInput, this.occupancyConfigAdultsDecrementIcon, this.occupancyConfigAdultsIncrementIcon
-            );
-            if (query.occupancy.children) {
-                let childrenCount = (query.occupancy.children as any[]).length;
-                this.log.debug(`Children count - ${childrenCount}`)
-                this.log.debug(`Children - ${JSON.stringify(query.occupancy.children)}`)
-
-                await this.adjustValueForOccupancy(
-                    childrenCount, this.occupancyConfigChildrenInput, this.occupancyConfigChildrenDecrementIcon, this.occupancyConfigChildrenIncrementIcon
-                );
-
-                for (let i = 0; i < childrenCount; i++) {
-                    console.log("Block statement execution no." + i);
-                    await this.getOccupancyConfigChildAgeDropdown(i + 1).setOption(this.page, query.occupancy.children[i].toString());
-                }
-            }
-            await this.adjustValueForOccupancy(
-                query.occupancy.rooms, this.occupancyConfigRoomsInput, this.occupancyConfigRoomsDecrementIcon, this.occupancyConfigRoomsIncrementIcon
-            );
-
-            if (query.occupancy.pets == true) {
-                if (!await this.occupancyPetsCheckboxHidden.isChecked(this.page)) {
-                    await this.occupancyPetsCheckboxSwitcher.click(this.page,);
-                }
-            } else if (query.occupancy.pets == false) {
-                if (await this.occupancyPetsCheckboxHidden.isChecked(this.page)) {
-                    await this.occupancyPetsCheckboxSwitcher.click(this.page,);
-                }
-            }
-
-            await this.occupancyConfigPopupDoneButton.click(this.page);
+            await this.fillOcupancy(query.occupancy);
         }
-
         await this.searchSubmitButton.click(this.page);
         await this.waitForNetworkIdle();
+    }
+
+    private async fillWhere(where) {
+        await this.destinationContainer.click(this.page);
+        await this.destinationInput.fill(this.page, where);
+        await this.pause(500);
+        await this.getDestinationAutocompleteResult(1).click(this.page);
+    }
+
+    private async fillWhen(when) {
+        if (!await this.datesContainerButton.isVisible(this.page)) {
+            await this.datesContainerButton.click(this.page);
+        }
+        if (when.flexibility) {
+            await this.getFlexibleDaysOption(when.flexibility).click(this.page);
+        }
+        let fromMonth = when.from.month == 'next' ? 2 : 1;
+        await this.getDatepickerDay(when.from.day, fromMonth).click(this.page);
+
+        let toMonth = when.to.month == 'next' ? 2 : 1;
+        await this.getDatepickerDay(when.to.day, toMonth).click(this.page);
+    }
+
+    private async fillOcupancy(occupancy) {
+        if (!await this.occupancyConfigPopup.isVisible(this.page)) {
+            await this.occupancyConfigButton.click(this.page);
+        }
+        await this.adjustValueForOccupancy(
+            occupancy.adults, this.occupancyConfigAdultsInput, this.occupancyConfigAdultsDecrementIcon, this.occupancyConfigAdultsIncrementIcon
+        );
+        if (occupancy.children) {
+            let childrenCount = (occupancy.children as any[]).length;
+            this.log.debug(`Children count - ${childrenCount}`)
+            this.log.debug(`Children - ${JSON.stringify(occupancy.children)}`)
+
+            await this.adjustValueForOccupancy(
+                childrenCount, this.occupancyConfigChildrenInput, this.occupancyConfigChildrenDecrementIcon, this.occupancyConfigChildrenIncrementIcon
+            );
+
+            for (let i = 0; i < childrenCount; i++) {
+                console.log("Block statement execution no." + i);
+                await this.getOccupancyConfigChildAgeDropdown(i + 1).setOption(this.page, occupancy.children[i].toString());
+            }
+        }
+        await this.adjustValueForOccupancy(
+            occupancy.rooms, this.occupancyConfigRoomsInput, this.occupancyConfigRoomsDecrementIcon, this.occupancyConfigRoomsIncrementIcon
+        );
+
+        if (occupancy.pets == true) {
+            if (!await this.occupancyPetsCheckboxHidden.isChecked(this.page)) {
+                await this.occupancyPetsCheckboxSwitcher.click(this.page,);
+            }
+        } else if (occupancy.pets == false) {
+            if (await this.occupancyPetsCheckboxHidden.isChecked(this.page)) {
+                await this.occupancyPetsCheckboxSwitcher.click(this.page,);
+            }
+        }
+
+        await this.occupancyConfigPopupDoneButton.click(this.page);
     }
 
     private async adjustValueForOccupancy(targetValue: number | undefined, input: UiElement, decrement: UiElement, increment: UiElement) {
