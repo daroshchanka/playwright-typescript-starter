@@ -42,7 +42,7 @@ export class HttpClient {
 
     private async doRequest(method: string, url: string, options?: RequestOptions) {
         let opt: RequestOptions = Object.assign(new RequestOptions(), options)
-        this.log.debug(`${method.toUpperCase()} ${url} --> \n${options}`)
+        this.log.debug(`${method.toUpperCase()} ${url} --> \n${JSON.stringify(options)}`)
         let playwrightResponse = await this.apiRequest.fetch(url, opt?.withMethod(method));
         let result = await Response.create(playwrightResponse);
         this.log.debug(`<-- ${method.toUpperCase()} ${url} - ${result.status()}`)

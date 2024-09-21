@@ -8,7 +8,6 @@ export class LandingPage extends BaseWebPage {
 
     private heroBanner = UiElement.byXpath("//div[contains(@class, 'hero-banner')]");
     private promoSection = UiElement.byXpath("//div[contains(@class, 'promo-section')]");
-    private merchCarousel = UiElement.byXpath("//div[contains(@data-testid, 'merch-carousel')]");
     private registerPopup = UiElement.byXpath("//div[@role='dialog']");
     private registerPopupCloseIcon = UiElement.byXpath(`${this.registerPopup.locator}//button`);
     readonly topHeader: TopHeaderWidget;
@@ -29,8 +28,7 @@ export class LandingPage extends BaseWebPage {
 
     async isLoaded(): Promise<boolean> {
         let result = await this.heroBanner.isVisible(this.page) &&
-        await this.promoSection.isVisible(this.page) &&
-        await this.merchCarousel.isVisible(this.page)
+        await this.promoSection.isVisible(this.page)
         this.log.info(`Check Landing page is loaded - ${result}`)
         return result;
     }

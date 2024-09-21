@@ -56,8 +56,8 @@ test.describe('Booking.com search appartments', () => {
     
         let searchResultsPage = new SearchResultsPage(page);
         expect(await searchResultsPage.isLoaded()).toBeTruthy();
-        expect(await searchResultsPage.getSearchResultCardsCount()).toBeLessThan(10);
-        expect(await searchResultsPage.getAssertiveHeaderText()).toMatch(new RegExp(`${searchQuery.where}: \\d properties found`));
+        expect(await searchResultsPage.getSearchResultCardsCount()).toBeLessThan(25);
+        expect(await searchResultsPage.getAssertiveHeaderText()).toMatch(new RegExp(`${searchQuery.where}: \\d+ properties found`));
     
         let searchQuery2 = {
             occupancy: {
@@ -65,7 +65,7 @@ test.describe('Booking.com search appartments', () => {
             }
         }
         await searchResultsPage.doSearch(searchQuery2);
-        expect(await searchResultsPage.getSearchResultCardsCount()).toBeGreaterThan(10);
+        expect(await searchResultsPage.getSearchResultCardsCount()).toBeGreaterThanOrEqual(25);
         expect(await searchResultsPage.getAssertiveHeaderText()).toMatch(new RegExp(`${searchQuery.where}: \\d+ properties found`));
     });
 

@@ -1,6 +1,6 @@
 import { AnythingService } from '../../../project/httpbin/api/services/anythingService';
 import { AnythingDto } from '../../../project/httpbin/utils/data/anythingDto';
-import { AnythingGeterator } from '../../../project/httpbin/utils/data/generators/anythingGenerator';
+import { AnythingGenerator } from '../../../project/httpbin/utils/data/generators/anythingGenerator';
 import { test, expect } from '@playwright/test'
 import { TestConfig } from '../testConfig';
 
@@ -25,44 +25,44 @@ test.describe('httpbin.org Anything Api group', () => {
 
     test('POST /anything', async ({ request }) => {
         let apiService = new AnythingService(request);
-        let input: AnythingDto = AnythingGeterator.generate();
+        let input: AnythingDto = AnythingGenerator.generate();
         let response = await apiService.postAnything(input);
 
         expect(response.status()).toEqual(200);
-        let jsonDataOutput = JSON.parse(response.json().data) as AnythingDto;
-        expect(jsonDataOutput.keyString).toEqual(input.keyString);
-        expect(jsonDataOutput.keyBoolean).toEqual(input.keyBoolean);
-        expect(jsonDataOutput.keyNumber).toEqual(input.keyNumber);
-        expect(jsonDataOutput.keyArrayString).toEqual(input.keyArrayString);
-        expect(jsonDataOutput.keyArrayObj).toEqual(input.keyArrayObj);
+        let jsonData = JSON.parse(response.json().data) as AnythingDto;
+        expect(jsonData.keyString).toEqual(input.keyString);
+        expect(jsonData.keyBoolean).toEqual(input.keyBoolean);
+        expect(jsonData.keyNumber).toEqual(input.keyNumber);
+        expect(jsonData.keyArrayString).toEqual(input.keyArrayString);
+        expect(jsonData.keyArrayObj).toEqual(input.keyArrayObj);
     });
 
     test('PUT /anything', async ({ request }) => {
         let apiService = new AnythingService(request);
-        let input: AnythingDto = AnythingGeterator.generate();
+        let input: AnythingDto = AnythingGenerator.generate();
         let id = 100000;
         let response = await apiService.putAnything(id, input);
 
         expect(response.status()).toEqual(200);
-        let responseJson = response.json()
-        let jsonDataOutput = JSON.parse(responseJson.data) as AnythingDto;
-        expect(jsonDataOutput.keyString).toEqual(input.keyString);
-        expect(jsonDataOutput.keyBoolean).toEqual(input.keyBoolean);
-        expect(jsonDataOutput.keyNumber).toEqual(input.keyNumber);
-        expect(jsonDataOutput.keyArrayString).toEqual(input.keyArrayString);
-        expect(jsonDataOutput.keyArrayObj).toEqual(input.keyArrayObj);
-        expect(responseJson.headers.Id).toEqual(id.toString());
+        let json = response.json()
+        let jsonData = JSON.parse(json.data) as AnythingDto;
+        expect(jsonData.keyString).toEqual(input.keyString);
+        expect(jsonData.keyBoolean).toEqual(input.keyBoolean);
+        expect(jsonData.keyNumber).toEqual(input.keyNumber);
+        expect(jsonData.keyArrayString).toEqual(input.keyArrayString);
+        expect(jsonData.keyArrayObj).toEqual(input.keyArrayObj);
+        expect(json.headers.Id).toEqual(id.toString());
     });
 
     
     test('DELETE /anything', async ({ request }) => {
         let apiService = new AnythingService(request);
-        let data = [10000, 999912, 234234]
-        let response = await apiService.deleteAnything(data);
+        let ids = [10000, 999912, 234234]
+        let response = await apiService.deleteAnything(ids);
 
         expect(response.status()).toEqual(200);
-        let jsonDataOutput = JSON.parse(response.json().data)
-        expect(jsonDataOutput.ids).toEqual(data);
+        let jsonData = JSON.parse(response.json().data)
+        expect(jsonData.ids).toEqual(ids);
     });
 
 });

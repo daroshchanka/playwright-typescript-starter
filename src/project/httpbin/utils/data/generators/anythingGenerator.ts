@@ -1,7 +1,7 @@
 import { AnythingDto } from "../anythingDto";
 import { faker } from '@faker-js/faker';
 
-export class AnythingGeterator {
+export class AnythingGenerator {
 
     static generate(): AnythingDto {
         let result = new AnythingDto();
@@ -14,9 +14,9 @@ export class AnythingGeterator {
             faker.animal.bear.name,
         ]
         result.keyArrayObj = [
-            { name: faker.name.firstName(), c: 0, d: false },
-            { name: faker.name.firstName(), c: 1, d: true },
-            { name: faker.name.firstName(), c: 2, d: true },
+            { name: faker.person.firstName(), c: 0, d: false },
+            { name: faker.person.firstName(), c: 1, d: true },
+            { name: faker.person.firstName(), c: 2, d: true },
         ]
         return result;
     }
