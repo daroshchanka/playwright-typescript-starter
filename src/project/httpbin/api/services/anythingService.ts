@@ -6,10 +6,10 @@ import { BaseApiService } from "../../../../core/api/baseApiService";
 export class AnythingService extends BaseApiService {
 
     private resources = {
-        get: "/anything",
-        post: "/anything",
-        put: "/anything",
-        delete: "/anything",
+        get: `${this.baseUrl}/anything`,
+        post: `${this.baseUrl}/anything`,
+        put: `${this.baseUrl}/anything`,
+        delete: `${this.baseUrl}/anything`,
     }
 
     async getAnything(params?: { [key: string]: string | number | boolean }): Promise<Response> {
