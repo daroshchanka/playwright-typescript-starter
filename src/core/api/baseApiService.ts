@@ -4,11 +4,13 @@ import { ILogObj, Logger } from "tslog";
 
 export class BaseApiService {
 
+    protected baseUrl: string;
     protected readonly httpClient: HttpClient;
     protected log: Logger<ILogObj> = new Logger();
 
-    constructor(request: APIRequestContext) {
+    constructor(request: APIRequestContext, baseUrl: string = '') {
         this.httpClient = new HttpClient(request);
+        this.baseUrl = baseUrl;
     }
 
 }
