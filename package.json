@@ -10,8 +10,9 @@
         "health-check": "npm run clean && npx playwright test ./src/test/health-check.spec.ts --project=chromium",
         "show-report-playwright": "npx playwright show-report ./output/html",
         "show-report-allure": "allure generate ./output/allure-results -o ./output/allure-report --clean & allure open ./output/allure-report",
-        "test-booking": "npm run clean && npx playwright test ./src/test/booking/ --project=chromium",
+        "test-booking": "npm run clean && npx playwright test ./src/test/booking/ --project=chromium --workers 4",
         "test-httpbin": "npm run clean && npx playwright test ./src/test/httpbin/ --project=chromium",
+        "test-hybrid": "npm run clean && npx playwright test ./src/test/hybrid-web-api.spec.ts --project=msedge --headed",
         "test-all": "npm run clean && npx playwright test --project=chromium",
         "vscode-debug": "npx playwright test --config ./playwright.config.ts --workers=1 --project=chromium --headed"
     },
