@@ -50,7 +50,21 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         viewport: viewport, // have to define viewport
-        channel: "chrome",
+        channel: 'chrome',
+        headless: true,
+        launchOptions: {
+          args: ["--disable-dev-shm-usage", '--disable-blink-features=AutomationControlled'],
+          ignoreDefaultArgs: ['--disable-component-extensions-with-background-pages'],
+          slowMo: 100,
+        }
+      },
+    },
+    {
+      name: 'msedge',
+      use: {
+        ...devices['Desktop Edge'],
+        viewport: viewport, // have to define viewport
+        channel:'msedge',
         headless: true,
         launchOptions: {
           args: ["--disable-dev-shm-usage", '--disable-blink-features=AutomationControlled'],
