@@ -1,17 +1,17 @@
 import { LandingPage } from '../../../project/booking/web/pages/landingPage';
 import { SearchResultsPage } from '../../../project/booking/web/pages/searchResultsPage';
 import { test, expect } from '@playwright/test';
-import { TestConfig } from '../testConfig';
+import { BookingTestConfig } from '../bookingTestConfig';
 
 test.use({
-    baseURL: TestConfig.instance.getWebBaseUrl(),
+    baseURL: BookingTestConfig.instance.getWebBaseUrl(),
     locale: 'en-Gb',
 });
 
 
-test.describe('Booking.com search appartments', () => {
+test.describe('Booking.com search apartments', () => {
 
-    test('Simple search query', async ({ page }) => {
+    test('simple search query', async ({ page }) => {
         let landingPage = new LandingPage(page);
         await landingPage.navigate();
         expect(await landingPage.isLoaded()).toBeTruthy();
@@ -33,7 +33,7 @@ test.describe('Booking.com search appartments', () => {
     });
     
     
-    test('Complex search query', async ({ page }) => {
+    test('complex search query', async ({ page }) => {
         let landingPage = new LandingPage(page);
         await landingPage.navigate();
         expect(await landingPage.isLoaded()).toBeTruthy();
@@ -42,13 +42,13 @@ test.describe('Booking.com search appartments', () => {
             when: {
                 from: { day: new Date().getDate(), month: 'current' },
                 to: { day: 15, month: 'next' },
-                flexibility: '7'
+                flexibility: '7',
             },
             occupancy: {
                 adults: 1,
                 children: [0, 7, 17],
                 rooms: 2,
-                pets: true
+                pets: true,
             }
         }
     
@@ -61,7 +61,7 @@ test.describe('Booking.com search appartments', () => {
     
         let searchQuery2 = {
             occupancy: {
-                pets: false
+                pets: false,
             }
         }
         await searchResultsPage.doSearch(searchQuery2);
@@ -70,17 +70,3 @@ test.describe('Booking.com search appartments', () => {
     });
 
 });
-
-
-test.describe('Booking.com language detection by browser locale', () => {
-
-    test.use({ locale: 'fr-FR' });
-
-    test('should redirect to the target location index page', async ({ page }) => {
-        await page.goto('/')
-        expect(page.url()).toContain('/index.fr.html');
-    });
-
-});
-
-

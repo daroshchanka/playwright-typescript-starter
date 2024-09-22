@@ -65,6 +65,11 @@ export class UiElement {
         await this.get(page).waitFor({ state: 'visible', timeout: (timeoutSec * 1000) });
     }
 
+    async waitForHidden(page: Page | Frame, timeoutSec: number = 10) {
+        this.log.debug(`[${this.locator}] waitForHidden(${timeoutSec})`)
+        await this.get(page).waitFor({ state: 'hidden', timeout: (timeoutSec * 1000) });
+    }
+
     async waitForAttached(page: Page | Frame, timeoutSec: number = 10) {
         this.log.debug(`[${this.locator}] waitForAttached(${timeoutSec})`)
         await this.get(page).waitFor({ state: 'attached', timeout: (timeoutSec * 1000) });
