@@ -13,6 +13,11 @@ export class LandingPage extends BaseWebPage {
     readonly topHeader: TopHeaderWidget;
     readonly search: SearchWidget;
 
+    private mobileViewHeaderMenu = UiElement.byTestId('header-mobile-menu-button');
+    private mobileViewMenuDrawer = UiElement.byTestId('header-mobile-menu-modal');
+    private mobileViewMenuDrawerCloseButton = UiElement.byTestId('header-mobile-menu-modal-close');
+    private mobileViewMenuCareersItem = UiElement.byXpath(`${this.mobileViewMenuDrawer.locator}//a[contains(@href, 'https://careers.booking.com')]`);
+
     constructor(page: Page) {
         super(page);
         this.topHeader = new TopHeaderWidget(page);
@@ -23,7 +28,6 @@ export class LandingPage extends BaseWebPage {
         this.log.info('Navigate to Landing page');
         await this.page.goto('/');
         await this.handleRegisterPopup();
-        await this.waitForNetworkIdle();
     }
 
     async isLoaded(): Promise<boolean> {
@@ -38,6 +42,7 @@ export class LandingPage extends BaseWebPage {
     }
 
     private async handleRegisterPopup() {
+        await this.waitForNetworkIdle();
         try {
             await this.registerPopup.waitForAttached(this.page, 2);
             if (await this.registerPopup.isVisible(this.page)) {
@@ -47,5 +52,35 @@ export class LandingPage extends BaseWebPage {
             }
         } catch (ignored) {
         }
+    }
+
+    async isMobileViewLoaded(): Promise<boolean> {
+        let result = await this.mobileViewHeaderMenu.isVisible(this.page)
+        this.log.info(`Check is Landing page Mobile view loaded - ${result}`)
+        return result;
+    }
+
+    async openMobileMenu() {
+        this.log.info(`Open mobile view top menu`)
+        await this.mobileViewHeaderMenu.click(this.page);
+        await this.pause(500);
+    }
+
+    async isMobileMenuOpened(): Promise<boolean> {
+        let result = await this.mobileViewMenuDrawer.isVisible(this.page)
+        this.log.info(`Check is Mobile menu opened - ${result}`)
+        return result;
+    }
+
+    async isMobileMenuCareersItemVisible(): Promise<boolean> {
+        let result = await this.mobileViewMenuCareersItem.isVisible(this.page)
+        this.log.info(`Check is Mobile menu Careers item visible - ${result}`)
+        return result;
+    }
+
+    async closeMobileMenu() {
+        this.log.info(`Close mobile view top menu`)
+        await this.mobileViewMenuDrawerCloseButton.click(this.page);
+        await this.mobileViewMenuDrawerCloseButton.waitForDetached(this.page);
     }
 }

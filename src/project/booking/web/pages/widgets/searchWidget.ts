@@ -57,7 +57,7 @@ export class SearchWidget extends BaseWebPage {
             await this.fillWhen(query.when);
         }
         if (query.occupancy) {
-            await this.fillOcupancy(query.occupancy);
+            await this.fillOccupancy(query.occupancy);
         }
         await this.searchSubmitButton.click(this.page);
         await this.waitForNetworkIdle();
@@ -84,7 +84,7 @@ export class SearchWidget extends BaseWebPage {
         await this.getDatepickerDay(when.to.day, toMonth).click(this.page);
     }
 
-    private async fillOcupancy(occupancy) {
+    private async fillOccupancy(occupancy) {
         if (!await this.occupancyConfigPopup.isVisible(this.page)) {
             await this.occupancyConfigButton.click(this.page);
         }
@@ -101,7 +101,6 @@ export class SearchWidget extends BaseWebPage {
             );
 
             for (let i = 0; i < childrenCount; i++) {
-                console.log("Block statement execution no." + i);
                 await this.getOccupancyConfigChildAgeDropdown(i + 1).setOption(this.page, occupancy.children[i].toString());
             }
         }
