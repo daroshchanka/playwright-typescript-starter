@@ -1,12 +1,11 @@
-import { AnythingService } from '../../../project/httpbin/api/services/anythingService';
 import { AnythingDto } from '../../../project/httpbin/utils/data/anythingDto';
 import { AnythingGenerator } from '../../../project/httpbin/utils/data/generators/anythingGenerator';
 import { test, expect } from '@playwright/test'
-import { TestConfig } from '../testConfig';
-
+import { HttpbinTestConfig } from '../httpbinTestConfig';
+import { AnythingService } from '../../../project/httpbin/api/services/anythingService';
 
 test.use({
-    baseURL: TestConfig.instance.getApiBaseUrl(),
+    baseURL: HttpbinTestConfig.instance.getApiBaseUrl(),
 });
 
 test.describe('httpbin.org Anything Api group', () => {
@@ -54,7 +53,7 @@ test.describe('httpbin.org Anything Api group', () => {
         expect(json.headers.Id).toEqual(id.toString());
     });
 
-    
+
     test('DELETE /anything', async ({ request }) => {
         let apiService = new AnythingService(request);
         let ids = [10000, 999912, 234234]

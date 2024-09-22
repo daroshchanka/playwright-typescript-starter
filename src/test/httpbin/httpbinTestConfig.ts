@@ -1,10 +1,10 @@
 
-export class TestConfig {
+export class HttpbinTestConfig {
 
     readonly env: string;
     private readonly envConfigs: any;
 
-    static instance: TestConfig = new TestConfig(process.env.npm_config_ENV == undefined ? 'dev' : process.env.npm_config_ENV);
+    static instance: HttpbinTestConfig = new HttpbinTestConfig(process.env.npm_config_ENV == undefined ? 'dev' : process.env.npm_config_ENV);
 
     private devEnv = {
         web: { baseUrl: 'TBD' },
