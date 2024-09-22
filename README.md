@@ -2,9 +2,9 @@
 
 Test automation project boilerplate including packages structure, reporting, logging, multi-env run configuration for WEB and API test automation.
 
-Pure Playwright APIs wrapped a little to add more logs/tracability to test execution and to make their's usage less-verbose in tests.
+Pure Playwright APIs wrapped a little to add more logs/traceability to test execution and to make theirs usage less-verbose in tests.
 
-Optionally Database and Email utills added as the example how the project can be extended.
+Optionally Database and Email utils added as the example how the project can be extended.
 
 ### Project Structure
 
