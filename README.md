@@ -40,13 +40,13 @@ Explore examples:
 
 ### Configuration
 
-#### Platwight Test configuration
+#### Playwright Test configuration
 
-`playwright.config.ts` placed in root, it's provided by `@playwright/test` and no customizations added in the framework to handle it.
+`playwright.config.ts` placed in the project root, it's provided by `@playwright/test` and no customizations added in the framework to handle it.
 
-It allows to configure Playwright tool itsef and also tests/reports.
+It allows to configure Playwright tool itself and also tests/reports.
 
-Important concept here is the ability to define _projects_ a set of launch configs grouped under some name, easy to refer in the test run command.
+Important concept here is the ability to define _projects_ - a set of launch configs grouped under some name, easy to refer in the test run command.
 
 _Example_:
 
@@ -144,7 +144,7 @@ export default defineConfig({
 
 });
 ```
-(see the see the [full reference](https://playwright.dev/docs/test-configuration))
+see the full [reference](https://playwright.dev/docs/test-configuration).
 
 
 #### Multi-env configuration
@@ -188,7 +188,7 @@ export class BookingTestConfig {
     }
 
     private stageEnv = {
-        web: { baseUrl: 'https://www.booking-stage.com },
+        web: { baseUrl: 'https://www.booking-stage.com' },
         api: { baseUrl: 'https://www.api.booking-stage.com' },
     }
 
@@ -220,11 +220,10 @@ export class BookingTestConfig {
 }
 ```
 
-
 #### Generate/Show Reports
 
-- `npm run show-report-playwright` - Default playwright report
-- `npm run show-report-allure` - Allure report
+- `npm run show-report-playwright` - Default playwright report (static report generated to `output/html`)
+- `npm run show-report-allure` - Allure report (static report generated to `output/allure-report`)
 
 ![](.assets/web-report-example.png)
 ![](.assets/api-report-example.png)
