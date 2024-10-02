@@ -26,17 +26,47 @@ Optionally Database and Email utils added as the example how the project can be 
 
 ### Quick Start
 
-Do 4 steps:
+_Do 4 steps_:
 - `npm install` - install dependencies
 - `npm run install-playwright` - install playwright browsers + dependencies
 - `npm run health-check` - run `test/health-check.spec.ts` spec
 - `npm run show-report-playwright` or `npm run show-report-allure` - show reports
 
-Explore examples:
+#### Explore examples
 
 - WEB automation: `project/booking/`, `test/booking/`
 - API automation: `project/httpbin/`, `test/httpbin/`
 - HYBRID WEB+API spec: `test/hybrid-web-api.spec.ts`
+
+#### Run tests
+
+_Short run commands from the`package.json`_:
+
+- `npm run test-booking`
+- `npm run test-httpbin`
+
+_See the full commands_:
+
+```shell
+npm run clean && npx playwright test ./src/test/httpbin/ --project=chromium
+```
+
+```shell
+npm run clean && npx playwright test ./src/test/booking/ --project=chromium --workers 4
+```
+
+- `--project` should be always provided not to cause the tests executed multiple times per each project 
+    defined in `playwright.config.ts`. For api tests `--project` also should be provided, but will not take any effect.
+- `--workers` option defines thread-count for parallel test execution, 1 worker is the default behaviour
+
+
+#### Reporting
+
+- `npm run show-report-playwright` - Default playwright report (static report generated to `output/html`)
+- `npm run show-report-allure` - Allure report (static report generated to `output/allure-report`)
+
+![](.assets/web-report-example.png)
+![](.assets/api-report-example.png)
 
 ### Configuration
 
@@ -220,13 +250,6 @@ export class BookingTestConfig {
 }
 ```
 
-#### Generate/Show Reports
-
-- `npm run show-report-playwright` - Default playwright report (static report generated to `output/html`)
-- `npm run show-report-allure` - Allure report (static report generated to `output/allure-report`)
-
-![](.assets/web-report-example.png)
-![](.assets/api-report-example.png)
 
 ### Other Implementations
 
