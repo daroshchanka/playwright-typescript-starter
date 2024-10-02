@@ -71,7 +71,7 @@ export class SearchWidget extends BaseWebPage {
     }
 
     private async fillWhen(when) {
-        if (!await this.datesContainerButton.isVisible(this.page)) {
+        if (!await this.datesContainer.isVisible(this.page)) {
             await this.datesContainerButton.click(this.page);
         }
         if (when.flexibility) {

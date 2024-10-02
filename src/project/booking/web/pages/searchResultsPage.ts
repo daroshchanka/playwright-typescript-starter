@@ -7,7 +7,7 @@ import { SearchWidget } from './widgets/searchWidget';
 export class SearchResultsPage extends BaseWebPage {
 
     private assertiveHeader = UiElement.byXpath("//h1[@aria-live='assertive']");
-    private mapTrigger = UiElement.byTestId('map-trigger');
+    private mapTrigger = UiElement.byXpath("//div[contains(@data-testid, 'map-trigger')]");
     private searchResultItem = UiElement.byTestId('property-card');
     readonly topHeader: TopHeaderWidget;
     readonly search: SearchWidget;
