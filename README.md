@@ -25,6 +25,7 @@ Explore examples:
 
 - WEB automation: `project/booking/`, `test/booking/`
 - API automation: `project/httpbin/`, `test/httpbin/`
+- HYBRID WEB+API spec: `test/hybrid-web-api.spec.ts`
 
 #### Multi-env configuration
 
@@ -46,3 +47,8 @@ Unknown or missing env value will be mapped to `dev`.
 
 - `npm run show-report-playwright` - Default playwright report
 - `npm run show-report-allure` - Allure report (which is optional)
+
+
+### Other Implementations
+
+- [playwright-groovy-starter](https://github.com/daroshchanka/playwright-groovy-starter)
